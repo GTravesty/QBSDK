@@ -8,6 +8,7 @@ namespace QBSDK_Helper
     {
         public abstract class QBBaseObject : IAddRq, IModRq, IDelRq
         {
+            #region // PROPERTIES ///////////////////////////////////////////
             public string SourceID { get; set; }
             public string QBStaus { get; set; }
             public string QBMessage { get; set; }
@@ -49,14 +50,34 @@ namespace QBSDK_Helper
             }
 
             public List<DataExt> DataExtRet { get; set; }
+            #endregion
 
+            #region // CONSTRUCTORS /////////////////////////////////////////
+            public QBBaseObject() : this(null) { }
+            public QBBaseObject(XElement xElement)
+            {
+                if(xElement == null)
+                {
+                    return;
+                }
+                EditSequence = (string)xElement.Element(nameof(EditSequence));
+                TimeCreated = (DateTime?)xElement.Element(nameof(TimeCreated));
+                TimeModified = (DateTime?)xElement.Element(nameof(TimeModified));
+                // TODO: Test if this will convert properly or throw exception. May need to create explicit conversion
+                DataExtRet = (List<DataExt>)xElement.Elements(nameof(DataExtRet));
+            }
+            #endregion
+
+            #region // METHODS //////////////////////////////////////////////
             public abstract XElement GenerateAddRq();
             public abstract XElement GenerateModRq();
             public abstract XElement GenerateDelRq();
+            #endregion
         }
-
+        
         public abstract class QBTransaction : QBBaseObject
         {
+            #region // PROPERTIES ///////////////////////////////////////////
             public string TxnID { get; set; }
             public override string ID { get { return TxnID; } set { TxnID = value; } }
 
@@ -76,9 +97,25 @@ namespace QBSDK_Helper
                     _TxnDate = value;
                 }
             }
+            #endregion
+
+            #region // CONSTRUCTORS /////////////////////////////////////////
+            public QBTransaction() : this(null) { }
+            public QBTransaction(XElement xElement) : base(xElement)
+            {
+                if(xElement == null)
+                {
+                    return;
+                }
+                TxnID = (string)xElement.Element(nameof(TxnID));
+                TxnDate = (DateTime?)xElement.Element(nameof(TxnDate));
+            }
+            #endregion
         }
+
         public abstract class QBList : QBBaseObject
         {
+            #region // PROPERTIES ///////////////////////////////////////////
             public string ListID { get; set; }
             public override string ID { get { return ListID; } set { ListID = value; } }
             public string Name { get; set; }
@@ -113,10 +150,27 @@ namespace QBSDK_Helper
                     }
                 }
             }
-            public bool IsActive { get; set; } = true;
+            public bool? IsActive { get; set; }
             public BaseRef ParentRef { get; set; }
-            public int Sublevel { get; set; }
+            public int? Sublevel { get; set; }
             public List<string> IncludeRetElement { get; set; }
+            #endregion
+
+            #region // CONSTRUCTORS /////////////////////////////////////////
+            public QBList() : this(null) { }
+            public QBList(XElement xElement) : base(xElement)
+            {
+                if (xElement == null)
+                {
+                    return;
+                }
+                ListID = (string)xElement.Element(nameof(ListID));
+                Name = (string)xElement.Element(nameof(Name));
+                IsActive = (bool?)xElement.Element(nameof(IsActive));
+                ParentRef = (BaseRef)xElement.Element(nameof(ParentRef));
+                Sublevel = (int?)xElement.Element(nameof(Sublevel));                
+            }
+            #endregion
         }
     }
 }
