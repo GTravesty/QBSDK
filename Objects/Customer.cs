@@ -8,7 +8,7 @@ namespace QBSDK_Helper
     {
         public class Customer : QBList
         {
-            #region // PROPERTIES ///////////////////////////////////////////////////////
+            #region // PROPERTIES ///////////////////////////////////////////
             private ListType ListDelType = ListType.Customer;
             public BaseRef ClassRef { get; set; }
             public string CompanyName { get; set; }
@@ -46,7 +46,7 @@ namespace QBSDK_Helper
             public decimal? CreditLimit { get; set; }
             public BaseRef PreferredPaymentMethodRef { get; set; }
             public CreditCard CreditCardInfo { get; set; }
-            public JobStatus JobStatus { get; set; }
+            public JobStatus? JobStatus { get; set; }
             public DateTime? JobStartDate { get; set; }
             public DateTime? JobProjectedEndDate { get; set; }
             public DateTime? JobEndDate { get; set; }
@@ -54,12 +54,69 @@ namespace QBSDK_Helper
             public BaseRef JobTypeRef { get; set; }
             public string Notes { get; set; }
             public List<AdditionalNote> AdditionalNotes { get; set; }
-            public PreferredDeliveryMethod PreferredDeliveryMethod { get; set; }
+            public PreferredDeliveryMethod? PreferredDeliveryMethod { get; set; }
             public BaseRef PriceLevelRef { get; set; }
             public string ExternalGUID { get; set; }
             public BaseRef CurrencyRef { get; set; }
             #endregion
 
+            #region // CONSTRUCTORS /////////////////////////////////////////
+            public Customer() : this(null) { }
+            public Customer(XElement xElement) : base(xElement)
+            {
+                if(xElement == null)
+                {
+                    return;
+                }
+                ClassRef = (BaseRef)xElement.Element(nameof(ClassRef));
+                CompanyName = (string)xElement.Element(nameof(CompanyName));
+                Salutation = (string)xElement.Element(nameof(Salutation));
+                FirstName = (string)xElement.Element(nameof(FirstName));
+                MiddleName = (string)xElement.Element(nameof(MiddleName));
+                LastName = (string)xElement.Element(nameof(LastName));
+                JobTitle = (string)xElement.Element(nameof(JobTitle));
+                BillAddress = (Address)xElement.Element(nameof(BillAddress));
+                ShipAddress = (Address)xElement.Element(nameof(ShipAddress));
+                ShipToAddress = (List<Address>)xElement.Elements(nameof(ShipToAddress));
+                Phone = (string)xElement.Element(nameof(Phone));
+                AltPhone = (string)xElement.Element(nameof(AltPhone));
+                Fax = (string)xElement.Element(nameof(Fax));
+                Email = (string)xElement.Element(nameof(Email));
+                Cc = (string)xElement.Element(nameof(Cc));
+                Contact = (string)xElement.Element(nameof(Contact));
+                AltContact = (string)xElement.Element(nameof(AltContact));
+                AdditionalContactRef = (List<ContactRef>)xElement.Elements(nameof(AdditionalContactRef));
+                Contacts = (List<Contacts>)xElement.Elements(nameof(Contacts));
+                CustomerTypeRef = (BaseRef)xElement.Elements(nameof(CustomerTypeRef));
+                TermsRef = (BaseRef)xElement.Element(nameof(TermsRef));
+                SalesRepRef = (BaseRef)xElement.Element(nameof(SalesRepRef));
+                Balance = (decimal?)xElement.Element(nameof(Balance));
+                OpenBalance = (decimal?)xElement.Element(nameof(OpenBalance));
+                OpenBalanceDate = (DateTime?)xElement.Element(nameof(OpenBalanceDate));
+                SalesTaxCodeRef = (BaseRef)xElement.Element(nameof(SalesTaxCodeRef));
+                ItemSalesTaxRef = (BaseRef)xElement.Element(nameof(ItemSalesTaxRef));
+                ResaleNumber = (string)xElement.Element(nameof(ResaleNumber));
+                AccountNumber = (string)xElement.Element(nameof(AccountNumber));
+                CreditLimit = (decimal?)xElement.Element(nameof(CreditLimit));
+                PreferredPaymentMethodRef = (BaseRef)xElement.Element(nameof(PreferredPaymentMethodRef));
+                CreditCardInfo = (CreditCard)xElement.Element(nameof(CreditCardInfo));
+                JobStatus = (JobStatus?)xElement.Parse<JobStatus>();
+                JobStartDate = (DateTime?)xElement.Element(nameof(JobStartDate));
+                JobProjectedEndDate = (DateTime?)xElement.Element(nameof(JobProjectedEndDate));
+                JobEndDate = (DateTime?)xElement.Element(nameof(JobEndDate));
+                JobDesc = (string)xElement.Element(nameof(JobDesc));
+                JobTypeRef = (BaseRef)xElement.Element(nameof(JobTypeRef));
+                Notes = (string)xElement.Element(nameof(Notes));
+                AdditionalNotes = (List<AdditionalNote>)xElement.Elements(nameof(AdditionalNotes));
+                PreferredDeliveryMethod = (PreferredDeliveryMethod?)xElement.Parse<PreferredDeliveryMethod>();
+                PriceLevelRef = (BaseRef)xElement.Element(nameof(PriceLevelRef));
+                ExternalGUID = (string)xElement.Element(nameof(ExternalGUID));
+                CurrencyRef = (BaseRef)xElement.Element(nameof(CurrencyRef));
+
+            }
+            #endregion
+
+            #region // METHODS ///////////////////////////////////////
             public override XElement GenerateAddRq()
             {
                 XElement Add = new XElement("CustomerAdd");
@@ -116,7 +173,6 @@ namespace QBSDK_Helper
 
                 return AddRq;
             }
-
             public override XElement GenerateDelRq()
             {
                 XElement Del = new XElement("ListDelRq");
@@ -124,7 +180,6 @@ namespace QBSDK_Helper
                 Del.Add(ListID.ToQBXML(nameof(ListID)));
                 return Del;
             }
-
             public override XElement GenerateModRq()
             {
                 XElement Mod = new XElement("CustomerMod");
@@ -181,6 +236,7 @@ namespace QBSDK_Helper
                 return ModRq;
 
             }
+            #endregion
         }
     }
 }
