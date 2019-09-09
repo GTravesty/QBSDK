@@ -26,6 +26,10 @@ namespace QBSDK_Helper
             }
             public static explicit operator BaseRef(XElement value)
             {
+                if(value == null)
+                {
+                    return null;
+                }
                 return new BaseRef(value);
             }
         
