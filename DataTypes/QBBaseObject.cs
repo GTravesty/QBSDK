@@ -6,6 +6,7 @@ namespace QBSDK_Helper
 {
     public static partial class QBSDK
     {
+        // BaseObject for List and Transactions for QuickBooks        
         public abstract class QBBaseObject : IAddRq, IModRq, IDelRq
         {
             #region // PROPERTIES ///////////////////////////////////////////
@@ -75,6 +76,7 @@ namespace QBSDK_Helper
             #endregion
         }
         
+        // Base QuickBooks Transaction Object
         public abstract class QBTransaction : QBBaseObject
         {
             #region // PROPERTIES ///////////////////////////////////////////
@@ -113,6 +115,7 @@ namespace QBSDK_Helper
             #endregion
         }
 
+        // Base QuickBooks List Object
         public abstract class QBList : QBBaseObject
         {
             #region // PROPERTIES ///////////////////////////////////////////
