@@ -21,7 +21,7 @@ namespace QBSDK_Helper
             public string Memo { get; set; }
             public bool? IsPaid { get; set; }
             public string ExternalGUID { get; set; }
-            public List<Txn> LinkedTxn { get; set; }
+            public List<LinkedTxn> LinkedTxn { get; set; }
             public List<ExpenseLine> ExpenseLine { get; set; }
             public List<ItemLine> ItemLine { get; set; }
 
