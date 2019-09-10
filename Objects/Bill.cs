@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace QBSDK_Helper
@@ -7,9 +8,22 @@ namespace QBSDK_Helper
     {
         public class Bill : QBTransaction
         {
+            public int? TxnNumber { get; set; }
             public BaseRef VendorRef { get; set; }
-            // VendorAddress
+            public Address VendorAddress { get; set; }
             public BaseRef APAccountRef { get; set; }
+            public DateTime? DueDate { get; set; }
+            public decimal? AmountDue { get; set; }
+            public BaseRef CurrencyRef { get; set; }
+            public float? ExchangeRate { get; set; }
+            public decimal? AmountDueInHomeCurrency { get; set; }
+            public BaseRef TermsRef { get; set; }
+            public string Memo { get; set; }
+            public bool? IsPaid { get; set; }
+            public string ExternalGUID { get; set; }
+            public List<Txn> LinkedTxn { get; set; }
+            public List<ExpenseLine> ExpenseLine { get; set; }
+            public List<ItemLine> ItemLine { get; set; }
 
             public override XElement GenerateAddRq()
             {
