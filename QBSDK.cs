@@ -166,6 +166,7 @@ namespace QBSDK_Helper
             }
             return xElements;
         }
+                
 
         public static XElement ToQBXML(this BaseRef value, string name)
         {

@@ -72,7 +72,7 @@ namespace QBSDK_Helper
             #region // METHODS //////////////////////////////////////////////
             public abstract XElement GenerateAddRq();
             public abstract XElement GenerateModRq();
-            public abstract XElement GenerateDelRq();
+            public abstract XElement GenerateDelRq();            
             #endregion
         }
         
