@@ -19,6 +19,12 @@ namespace QBSDK_Helper
 
         public enum LinkType { AMTTYPE, QUANTYPE }
 
+        public enum AccountType { AccountsPayable, AccountsReceivable, Bank, CostOfGoodsSold, CreditCard, Equity, Expense, FixedAsset, Income, LongTermLiability, NonPosting, OtherAsset, OtherCurrentAsset, OtherCurrentLiability, OtherExpense, OtherIncome }
+
+        public enum SpecialAccountType { AccountsPayable, AccountsReceivable, CondenseItemAdjustmentExpenses, CostOfGoodsSold, DirectDepositLiabilities, Estimates, ExchangeGainLoss, InventoryAssets, ItemReceiptAccount, OpeningBalanceEquity, PayrollExpenses, PayrollLiabilities, PettyCash, PurchaseOrders, ReconciliationDifferences, RetainedEarnings, SalesOrders, SalesTaxPayable, UncategorizedExpenses, UncategorizedIncome, UndepositedFunds }
+
+        public enum CashFlowClassification { None, Operating, Investing, Financing, NotApplicable }
+
         public static Nullable<T> Parse<T>(this XElement xElement) where T : struct, Enum
         {
             if(xElement == null)

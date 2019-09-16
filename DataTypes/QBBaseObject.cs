@@ -50,7 +50,7 @@ namespace QBSDK_Helper
                 }
             }
 
-            public List<DataExt> DataExtRet { get; set; }
+            public List<DataExt> DataExt { get; set; }
             #endregion
 
             #region // CONSTRUCTORS /////////////////////////////////////////
