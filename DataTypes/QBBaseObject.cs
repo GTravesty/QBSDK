@@ -65,7 +65,7 @@ namespace QBSDK_Helper
                 TimeCreated = (DateTime?)xElement.Element(nameof(TimeCreated));
                 TimeModified = (DateTime?)xElement.Element(nameof(TimeModified));
                 // TODO: Test if this will convert properly or throw exception. May need to create explicit conversion
-                DataExtRet = (List<DataExt>)xElement.Elements(nameof(DataExtRet));
+                DataExt = (List<DataExt>)xElement.Elements(nameof(DataExt) + "Ret");
             }
             #endregion
 
