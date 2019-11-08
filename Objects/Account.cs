@@ -15,7 +15,7 @@ namespace QBSDK_Helper
             public string Desc { get; set; }
             public decimal? Balance { get; set; }
             public decimal? TotalBalance { get; set; }
-            private string TaxLineInfoRet;
+            private string TaxLineInfoRet { get; set; }
             public int? TaxLineID { get; set; }
             public string TaxLineName { get; set; }
             public CashFlowClassification? CashFlowClassification { get; set; }
