@@ -5,7 +5,7 @@ namespace QBSDK_Helper
 {
     public static partial class QBSDK
     {
-        public class Blank : QBList
+        public class Blank : List
         {
             #region // PROPERTIES ///////////////////////////////////////////
             

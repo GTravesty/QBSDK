@@ -6,7 +6,7 @@ namespace QBSDK_Helper
 {
     public static partial class QBSDK
     {
-        public class Customer : QBList
+        public class Customer : List
         {
             #region // PROPERTIES ///////////////////////////////////////////
             private ListType ListDelType = ListType.Customer;

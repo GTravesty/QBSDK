@@ -77,7 +77,7 @@ namespace QBSDK_Helper
         }
         
         // Base QuickBooks Transaction Object
-        public abstract class QBTransaction : QBBaseObject
+        public abstract class Txn : QBBaseObject
         {
             #region // PROPERTIES ///////////////////////////////////////////
             public string TxnID { get; set; }
@@ -102,8 +102,8 @@ namespace QBSDK_Helper
             #endregion
 
             #region // CONSTRUCTORS /////////////////////////////////////////
-            public QBTransaction() : this(null) { }
-            public QBTransaction(XElement xElement) : base(xElement)
+            public Txn() : this(null) { }
+            public Txn(XElement xElement) : base(xElement)
             {
                 if(xElement == null)
                 {
@@ -116,7 +116,7 @@ namespace QBSDK_Helper
         }
 
         // Base QuickBooks List Object
-        public abstract class QBList : QBBaseObject
+        public abstract class List : QBBaseObject
         {
             #region // PROPERTIES ///////////////////////////////////////////
             public string ListID { get; set; }
@@ -160,8 +160,8 @@ namespace QBSDK_Helper
             #endregion
 
             #region // CONSTRUCTORS /////////////////////////////////////////
-            public QBList() : this(null) { }
-            public QBList(XElement xElement) : base(xElement)
+            public List() : this(null) { }
+            public List(XElement xElement) : base(xElement)
             {
                 if (xElement == null)
                 {

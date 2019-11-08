@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace QBSDK_Helper
 {
     public static partial class QBSDK
     {
-        public class ExpenseLine : IAddRq, IModRq
+        public class ExpenseLine : IAddRq, IModRq, IQBXML
         {
             #region // PROPERTIES ///////////////////////////////////////////
             public int TxnLineID { get; set; }
@@ -76,6 +77,15 @@ namespace QBSDK_Helper
                 Mod.Add(SalesRepRef.ToQBXML(nameof(SalesRepRef)));
 
                 return Mod;
+            }
+
+            public XElement ToQBXML(string name)
+            {
+                return ToQBXML(name, null);
+            }
+            public XElement ToQBXML(string name, BaseRef OverrideItemAccountRef = null)
+            {
+                throw new NotImplementedException();
             }
             #endregion
 

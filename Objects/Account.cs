@@ -5,7 +5,7 @@ namespace QBSDK_Helper
 {
     public static partial class QBSDK
     {
-        public class Account : QBList
+        public class Account : List
         {
             #region // PROPERTIES ///////////////////////////////////////////
             public AccountType? AccountType { get; set; }
