@@ -5,6 +5,8 @@ namespace QBSDK_Helper
 {
     public static partial class QBSDK
     {
+        public enum QBEdition { SimpleStart, Pro, Premier, Enterprise }
+        
         public enum MatchCriterion { StartsWith, Contains, EndsWith }
 
         public enum JobStatus { None, Awarded, Closed, InProgress, NotAwarded, Pending }
