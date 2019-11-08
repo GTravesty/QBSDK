@@ -9,7 +9,7 @@ namespace QBSDK_Helper
         public class Customer : List
         {
             #region // PROPERTIES ///////////////////////////////////////////
-            private ListType ListDelType = ListType.Customer;
+            private ListType ListType = ListType.Customer;
             public BaseRef ClassRef { get; set; }
             public string CompanyName { get; set; }
             public string Salutation { get; set; }
@@ -176,7 +176,7 @@ namespace QBSDK_Helper
             public override XElement GenerateDelRq()
             {
                 XElement Del = new XElement("ListDelRq");
-                Del.Add(ListDelType.ToQBXML(nameof(ListDelType)));
+                Del.Add(ListType.ToQBXML(nameof(ListType)));
                 Del.Add(ListID.ToQBXML(nameof(ListID)));
                 return Del;
             }
