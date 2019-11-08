@@ -50,7 +50,7 @@ namespace QBSDK_Helper
                 }
             }
 
-            public List<DataExt> DataExtRet { get; set; }
+            public List<DataExt> DataExt { get; set; }
             #endregion
 
             #region // CONSTRUCTORS /////////////////////////////////////////
@@ -72,7 +72,7 @@ namespace QBSDK_Helper
             #region // METHODS //////////////////////////////////////////////
             public abstract XElement GenerateAddRq();
             public abstract XElement GenerateModRq();
-            public abstract XElement GenerateDelRq();
+            public abstract XElement GenerateDelRq();            
             #endregion
         }
         

@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace QBSDK_Helper
@@ -12,7 +13,7 @@ namespace QBSDK_Helper
             public TxnType TxnType { get; set; }
             public DateTime TxnDate { get; set; }
             public string RefNumber { get; set; }
-            public LinkType LinkType { get; set; }
+            public LinkType? LinkType { get; set; }
             public decimal Amount { get; set; }
             #endregion
 
@@ -20,17 +21,21 @@ namespace QBSDK_Helper
             public LinkedTxn() : this(null) { }
             public LinkedTxn(XElement xElement)
             {
+                if (xElement == null)
+                {
+                    return;
+                }
                 TxnID = (string)xElement.Element(nameof(TxnID));
                 TxnType = (TxnType)xElement.Parse<TxnType>();
                 TxnDate = (DateTime)xElement.Element(nameof(TxnDate));
                 RefNumber = (string)xElement.Element(nameof(RefNumber));
-                LinkType =(LinkType)xElement.Parse<LinkType>();
+                LinkType = (LinkType?)xElement.Parse<LinkType>();
                 Amount = (decimal)xElement.Element(nameof(Amount));
             }
 
             public static explicit operator LinkedTxn(XElement xElement)
             {
-                if(xElement == null)
+                if (xElement == null)
                 {
                     return null;
                 }
@@ -41,16 +46,22 @@ namespace QBSDK_Helper
             #region // METHODS //////////////////////////////////////////////
             public XElement ToQBXML(string name)
             {
-                XElement xElement = new XElement(name);
-                xElement.Add(TxnID.ToQBXML(nameof(TxnID)));
-                xElement.Add(TxnType.ToQBXML(nameof(TxnType)));
-                xElement.Add(TxnDate.ToQBXML(nameof(TxnDate)));
-                xElement.Add(RefNumber.ToQBXML(nameof(RefNumber)));
-                xElement.Add(Amount.ToQBXML(nameof(Amount)));
-
-                return xElement;
+                return new XElement(name, TxnID);
             }
             #endregion
+        }
+        public static List<XElement> ToIDList(this List<LinkedTxn> values, string name)
+        {
+            if (values == null)
+            {
+                return null;
+            }
+            List<XElement> xElements = new List<XElement>();
+            foreach (LinkedTxn value in values)
+            {
+                xElements.Add(new XElement(name, value.TxnID));
+            }
+            return xElements;
         }
     }
 }
